@@ -1,0 +1,677 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap');
+@import url('../fonts/icons/style.css');
+
+:root{
+    --color_bg: #e0e5eb;
+    --gradient: linear-gradient(to right, #a894e6, #7e77ee);
+    --grey: #f0f0f0;
+    --light: #ffff;
+    --transition: all 0.3s ease-in-out;
+
+    --penguin-face: white;
+    --penguin-picorna: orange;
+    --penguin-skin: gray;
+}
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body, html{
+  max-width: 100%;
+}
+
+body{
+    font-family: 'Rubik', sans-serif;
+    background-color: #e0e5eb;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+.mobile {
+    width: 350px;
+    height: 600px;
+    background-color:#fff;
+    border-radius: 20px;
+    display: grid;
+    grid-template-rows: 48px 1fr 62px;
+}
+
+.mobile__header,
+.mobile__footer {
+    align-self: center;
+    justify-self: center;
+}
+.mobile__content {
+    background-color: #fff;
+}
+
+/* UI - Components */
+.selectBox {
+    cursor: pointer;
+    width: 150px;
+    margin: 0 auto;
+    position: relative;
+    margin: 15px auto 20px;
+    
+}
+
+.selectBox__selected {
+    font-style: 18px;
+    font-weight: 500;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    background-color: #fff;
+}
+.ic_arrow {
+    font-style: 0.7em;
+    margin-left: 10px;
+}
+
+.selectBox.open .selectBox__list{
+    top: 120%; 
+    max-height: 200px;
+}
+.selectBox.open .ic_arrow{
+    transform: rotate(-180deg);
+}
+
+.ic_arrow{
+    display: inline-block;
+    font-size: 0.7em;
+    margin-left: 10px;
+    transform: rotate(0deg);
+    transition: var(--transition);
+}
+
+.selectBox__list {
+    position: absolute;
+    top: 0;
+    left: -16px;
+    right: -16px;
+    z-index: 1;
+    padding: 8px 14px;
+    max-height: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: var(--transition);
+}
+
+.selectBox__item {
+    cursor: pointer;
+}
+.selectBox__item.selected,
+.selectBox__item:hover{
+    color: #7e77ee;
+    font-weight: 600;
+}
+
+.selectBox__item:not(:last-child){
+    margin-bottom: 4px;
+}
+
+.rooms{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 20px;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 16px;
+}
+
+.room {
+    cursor: pointer;
+    display: grid;
+    background-color: var(--grey);
+    grid-template-rows: 130px 30px;
+    align-items: center;
+    font-size: 16px;
+    text-align: center;
+    transition: initial;
+    transition: 0.3s ease-in-out;
+    
+    border-radius: 12px;
+}
+
+.room:hover{
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.room.selected{
+    background: var(--gradient);
+    color: white
+}
+
+.room.selected i{
+    opacity: 1;
+}
+.room i {
+    align-items: center;
+    font-size: 5em;
+    align-items: center;
+    opacity: 0.9;
+} 
+
+/* Screen room settings */
+.settings{
+    display: none;
+    padding: 0 20px;
+}
+.settings__tabs{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 100px;
+    grid-gap: 14px;
+}
+.tab {
+    cursor: pointer;
+    display: grid;
+    background-color: var(--grey);
+    grid-template-rows: 2fr 1fr;
+    align-items: center;
+    font-size: 14px;
+    text-align: center;
+    transition: var(--transition);
+    border-radius: 12px;
+} 
+.tab:hover{
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.tab.selected{
+    background: var(--gradient);
+    color: white
+}
+.tab.selected i{
+    opacity: 1;
+}
+.tab i {
+    align-items: center;
+    font-size: 3.5em;
+    align-items: center;
+    opacity: 0.9;
+} 
+.setting__screen-title{
+    margin: 20px 0 15px;
+    font-weight: 300;
+    text-align: center;
+}
+
+/* Screens options */
+.setting__screen{
+    display: none;
+}
+.setting__screen.selected{
+    display: block;
+}
+.setting__screen-title{
+    margin: 20px 0 15px;
+    text-align: center;
+    font-weight: 400;
+}
+.setting__screen-icon{
+    text-align: center;
+    font-size: 30px;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+/* Temperature control button */
+.temperature-button {
+    cursor: pointer;
+    width: 240px;
+    height: 240px;;
+    margin: 0 auto;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.temperature-button__info{
+    position: relative;
+    font-size: 32px;
+    width: 170px;
+    height: 70%;
+    border-radius: 70%;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.temperature-button__info::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    top: 4%;
+    bottom: 4%;
+    border-radius: 100%;
+    opacity: 0.4;
+    border: 1px solid #000;
+}
+.dots-box {
+    transform: rotate(5deg);
+    transform-origin: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.dots, 
+.line,
+.line-active,
+.round,
+.separate-lines,
+.separate-dots{
+    fill: transparent;
+    stroke: var(--grey);
+    stroke-width: 3px;
+    stroke-linecap: round;
+    stroke-dasharray: 0 21;
+    transition: all 0.1s ease-in-out;   
+}
+.line,
+.line-active,
+.round{
+    stroke-width: 1px;
+    stroke-dasharray: 276 276;
+    transform: rotate(48deg);
+    transform-origin: center;
+}
+
+.line-active {
+    stroke: black;
+    stroke-dasharray: 54 276; /* from 54 to 276 */
+    transition: all 0.1s ease-in-out;
+}
+.round{
+    stroke-width: 6px;
+    stroke-dasharray: 0 276;
+    transform: rotate(-240deg); /* from -240 to 48 */
+}
+
+.separate-lines,
+.separate-dots{
+    stroke: white;
+    transform: rotate(60deg);
+    transform-origin: center;
+}
+
+.separate-dots{
+    stroke-dasharray: 40 313;
+}
+
+.separate-lines{
+    transform: rotate(49deg);
+    stroke-dasharray: 50 313;
+}
+
+/* Power */
+.power{
+    background: var(--gradient);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 45px;
+    font-size: 25px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.power.off{
+    color: #000;
+    background: var(--grey);
+}
+.power-label{
+    text-align: center;
+    margin-top: 8px;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.save-button{
+    background: var(--gradient);
+    color: white;
+    width: 250px;
+    margin: 15px auto 0;
+    border-radius: 100px;
+    font-size: 15px;
+    text-align: center;
+    padding: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.save-button:hover{
+    background: linear-gradient(to right, #8f7bcb, #5d55ce);
+    font-weight: bold
+}
+.btn:link,
+.btn:visited {
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+    position: absolute;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+}
+
+/* Slider */
+.slider{
+    cursor: pointer;
+    width: 100px;
+    height: 250px;
+    margin: 0 auto;
+    background-color:var(--grey);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+}
+.slider__progress {
+    position: absolute;
+    pointer-events: none;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    min-height: 30px;
+    height: 45%;
+}
+.slider__progress span{
+    pointer-events: none;
+}
+
+/* Switch */
+.switch{
+    cursor: pointer;
+    width: 60px;
+    height: 28px;
+    border-radius: 60px;
+    background: var(--grey);
+    margin: 30px auto 0;
+    position: relative;
+}
+.switch.off div{
+    left: 0%;
+    background: #777;
+}
+.switch div{
+    position: absolute;
+    left: 52%;
+    top: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 28px;
+    background: var(--gradient);
+    transition: var(--transition);
+}
+
+.unselective {
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;   
+    -khtml-user-select: none;   
+    -moz-user-select: none;      
+    -ms-user-select: none;       
+    user-select: none;           
+}
+
+/* penguin */
+
+.penguin {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    margin-top: 75px;
+    z-index: 4;
+    position: relative;
+    transition: transform 1s ease-in-out 0ms;
+  }
+  
+  .penguin * {
+    position: absolute;
+  }
+  
+  .penguin:active {
+    transform: scale(1.2);
+    cursor: not-allowed;
+  }
+  
+  .penguin-head {
+    width: 50%;
+    height: 45%;
+    background: linear-gradient(
+      45deg,
+      var(--penguin-skin),
+      rgb(239, 240, 228)
+    );
+    border-radius: 70% 70% 65% 65%;
+    top: 10%;
+    left: 25%;
+    z-index: 1;
+  }
+  
+  .face {
+    width: 60%;
+    height: 70%;
+    background-color: var(--penguin-face);
+    border-radius: 70% 70% 60% 60%;
+    top: 15%;
+  }
+  
+  .face.left {
+    left: 5%;
+  }
+  
+  .face.right {
+    right: 5%;
+  }
+  
+  .chin {
+    width: 90%;
+    height: 70%;
+    background-color: var(--penguin-face);
+    top: 25%;
+    left: 5%;
+    border-radius: 70% 70% 100% 100%;
+  }
+  
+  .eye {
+    width: 15%;
+    height: 17%;
+    background-color: black;
+    top: 45%;
+    border-radius: 50%;
+  }
+  
+  .eye.left {
+    left: 25%;
+  }
+  
+  .eye.right {
+    right: 25%;
+  }
+  
+  .eye-lid {
+    width: 150%;
+    height: 100%;
+    background-color: var(--penguin-face);
+    top: 25%;
+    left: -23%;
+    border-radius: 50%;
+  }
+  
+  .blush {
+    width: 15%;
+    height: 10%;
+    background-color: pink;
+    top: 65%;
+    border-radius: 50%;
+  }
+  
+  .blush.left {
+    left: 15%;
+  }
+  
+  .blush.right {
+    right: 15%;
+  }
+  
+  .beak {
+    height: 10%;
+    background-color: var(--penguin-picorna);
+    border-radius: 50%;
+  }
+  
+  .beak.top {
+    width: 20%;
+    top: 60%;
+    left: 40%;
+  }
+  
+  .beak.bottom {
+    width: 16%;
+    top: 65%;
+    left: 42%;
+  }
+  
+  .shirt {
+    font: bold 25px Helvetica, sans-serif;
+    top: 165px;
+    left: 127.5px;
+    z-index: 1;
+    color: #6a6969;
+  }
+  
+  .shirt div {
+    font-weight:  initial;
+    top: 22.5px;
+    left: 12px;
+  }
+  
+  .penguin-body {
+    width: 53%;
+    height: 45%;
+    background: linear-gradient(
+      45deg,
+      rgb(134, 133, 133) 0%,
+      rgb(234, 231, 231) 25%,
+      white 67%
+    );
+    border-radius: 80% 80% 100% 100%;
+    top: 40%;
+    left: 23.5%;
+  }
+  
+  .penguin-body::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 45%;
+    background-color: var(--penguin-skin);
+    top: 10%;
+    left: 25%;
+    border-radius: 0% 0% 100% 100%;
+    opacity: 70%;
+  }
+  
+  .arm {
+    width: 30%;
+    height: 60%;
+    background: linear-gradient(
+      90deg,
+      var(--penguin-skin),
+      rgb(209, 210, 199)
+    );
+    border-radius: 30% 30% 30% 120%;
+    z-index: -1;
+  }
+  
+  .arm.left {
+    top: 35%;
+    left: 5%;
+    transform-origin: top left; 
+    transform: rotate(130deg) scaleX(-1);
+    animation: 3s linear infinite wave;
+  }
+  
+  .arm.right {
+    top: 0%;
+    right: -5%;
+    transform: rotate(-45deg);
+  }
+  
+  @keyframes wave {
+    10% {
+      transform: rotate(110deg) scaleX(-1);
+    }
+    20% {
+      transform: rotate(130deg) scaleX(-1);
+    }
+    30% {
+      transform: rotate(110deg) scaleX(-1);
+    }
+    40% {
+      transform: rotate(130deg) scaleX(-1);
+    }
+  }
+  
+  .foot {
+    width:  15%;
+    height: 30%;
+    background-color: var(--penguin-picorna);
+    top: 85%;
+    border-radius: 50%;
+    z-index: -1;
+  }
+  
+  .foot.left {
+    left: 25%;
+    transform: rotate(80deg);
+  }
+  
+  .foot.right {
+    right: 25%;
+    transform: rotate(-80deg);
+  }
+
+.wrapper{
+    display: none;
+}
+
+@media screen and (max-width: 400px) {
+  .mobile {
+    margin-top: -30px;
+  }
+}

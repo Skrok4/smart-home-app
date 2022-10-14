@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="manifest" href="./manifest.json">
+  <script>
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('pwabuilder-sw.js')
+    }
+  </script>
+  <script src="pwabuilder-sw.js"></script>
+  <meta name="theme-color" content="#a894e6" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" type="image/x-icon" href="./Images/icon.svg">
+  <link rel="apple-touch-icon" sizes="152x152" href="./icons/apple-touch-icon_152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon_180.png">
+  <title>Smart home - Mobile app</title>
+</head>
+
+<body>
+  <div class="mobile">
+    <div class="mobile__content">
+
+      <div class="penguin">
+        <div class="penguin-head">
+          <div class="face left"></div>
+          <div class="face right"></div>
+          <div class="chin"></div>
+          <div class="eye left">
+            <div class="eye-lid"></div>
+          </div>
+          <div class="eye right">
+            <div class="eye-lid"></div>
+          </div>
+          <div class="blush left"></div>
+          <div class="blush right"></div>
+          <div class="beak top"></div>
+          <div class="beak bottom"></div>
+        </div>
+        <div class="shirt">
+        </div>
+        <div class="penguin-body">
+          <div class="arm left"></div>
+          <div class="arm right"></div>
+          <div class="foot left"></div>
+          <div class="foot right"></div>
+        </div>
+      </div>
+
+      <div id="wrapper" class="wrapper">
+        <div id="selectBox" class="selectBox">
+          <div class="selectBox__selected">
+            <span>All rooms</span>
+            <i class="ic_arrow"></i>
+          </div>
+          <div class="selectBox__list">
+            <div data-room="all" class="selectBox__item selected">
+              All rooms
+            </div>
+            <div data-room="living_room" class="selectBox__item">
+              Living room
+            </div>
+            <div data-room="bedroom" class="selectBox__item">Bedroom</div>
+            <div data-room="kitchen" class="selectBox__item">Kitchen</div>
+            <div data-room="bathroom" class="selectBox__item">Bathroom</div>
+            <div data-room="studio" class="selectBox__item">Studio</div>
+            <div data-room="washing_room" class="selectBox__item">
+              Washing Room
+            </div>
+          </div>
+        </div>
+
+        <div id="rooms" class="rooms">
+          <div data-room="living_room" class="room">
+            <i class="ic_livingroom"></i> <span>Living room</span>
+          </div>
+          <div data-room="bedroom" class="room">
+            <i class="ic_bedroom"></i> <span>Bedroom</span>
+          </div>
+          <div data-room="kitchen" class="room">
+            <i class="ic_kitchen"></i> <span>Kitchen</span>
+          </div>
+          <div data-room="bathroom" class="room">
+            <i class="ic_bathroom"></i> <span>Bathroom</span>
+          </div>
+          <div data-room="studio" class="room">
+            <i class="ic_studio"></i> <span>Studio</span>
+          </div>
+          <div data-room="washing_room" class="room">
+            <i class="ic_washingroom"></i> <span>Washing Room</span>
+          </div>
+        </div>
+
+        <div id="settings" class="settings">
+          <div id="settings__tabs" class="settings__tabs">
+            <div data-type="temperature" class="tab selected">
+              <i class="ic_temperature"></i>
+              <span>Temperature</span>
+            </div>
+            <div data-type="lights" class="tab">
+              <i class="ic_lights"></i>
+              <span>Light</span>
+            </div>
+            <div data-type="humidity" class="tab">
+              <i class="ic_humidity"></i>
+              <span>Humidity</span>
+            </div>
+          </div>
+          <div id="settings-panel" class="settings__screens">
+            <div data-type="temperature" class="setting__screen selected">
+              <div class="setting__screen-title">Temperature</div>
+              <div id="temperature-btn" class="temperature-button">
+                <svg class="dots-box" viewBox="0 0 103 103">
+                  <circle class="dots" r="50" cx="50%" cy="50%"></circle>
+                  <circle class="line" r="44" cx="50%" cy="50%"></circle>
+                  <circle id="temperature-line" class="line-active" r="44" cx="50%" cy="50%"></circle>
+                  <circle class="separate-lines" r="44" cx="50%" cy="50%"></circle>
+                  <circle id="temperature-round" class="round" r="44" cx="50%" cy="50%"></circle>
+                  <circle class="separate-dots" r="50" cx="50%" cy="50%"></circle>
+                </svg>
+                <div class="temperature-button__info unselective" ondblclick="clearSelection()" unselectable="on">
+                  <span id="temperature">16</span>
+                  <span>°C</span>
+                </div>
+              </div>
+              <div id="power" class="power">
+                <i class="ic_power"></i>
+              </div>
+              <div class="power-label">
+                Click to turn on/off</span>
+              </div>
+              <div id="save-temperature" class="save-button btn">
+                Set Temperature
+              </div>
+            </div>
+            <div data-type="lights" class="setting__screen">
+              <div class="setting__screen-title">Intensity</div>
+              <div class="setting__screen-icon">
+                <i class="ic_sun"></i>
+              </div>
+              <div class="slider">
+                <div id="lights-slider" class="slider__progress unselective" ondblclick="clearSelection()"
+                  unselectable="on">
+                  <span>45</span>%
+                </div>
+              </div>
+              <div id="lights-power" class="switch">
+                <div></div>
+              </div>
+            </div>
+            <div data-type="humidity" class="setting__screen">
+              <div class="setting__screen-title">Intensity</div>
+              <div class="setting__screen-icon">
+                <i class="ic_humidity2"></i>
+              </div>
+              <div class="slider">
+                <div id="humidity-slider" class="slider__progress" ondblclick="clearSelection()" unselectable="on">
+                  <span>45</span>%
+                </div>
+              </div>
+              <div id="humidity-power" class="switch">
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/script.js"></script>
+</body>
+
+</html>
